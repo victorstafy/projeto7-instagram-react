@@ -1,157 +1,105 @@
+const story_img_list=[{img:"img/9gag.svg",text:"9gag"},{img:"img/meowed.svg",text:"meowed"},
+                      {img:"img/barked.svg",text:"barked"},{img:"img/nathanwpylestrangeplanet.svg",text:"nathanwpylestrangeplanet"},
+                      {img:"img/wawawicomics.svg",text:"wawawicomics"},{img:"img/respondeai.svg",text:"respondeai"},        
+                      {img:"img/filomoderna.svg",text:"memeriagourmet"},{img:"img/memeriagourmet.svg",text:"memeriagourmet"}];
+const post_info=[{title:"meowed",img_1:"img/meowed.svg",img_2:"img/gato-telefone.svg",img_3:"img/respondeai.svg",
+text:"Curtido por <strong>respondeai</strong> e <strong>outras 101.523 pessoas</strong>"},
+{title:"barked",img_1:"img/barked.svg",img_2:"img/dog.svg",img_3:"img/adorable_animals.svg",
+text:"Curtido por <strong>adorable_animals</strong> e <strong>outras 99.159 pessoas</strong>"}]
+
+
+function Story(props) {
+  return (
+    <div class="story">
+        <div class="imagem">
+          <img src={props.img} />
+        </div>
+        <div class="usuario">
+          {props.user_text}
+        </div>
+        
+    </div>
+  );
+}
+
+function Post(props) {
+  return (
+    <div class="post">
+      <div class="topo">
+        <div class="usuario">
+          <img src={props.img_1} />
+          {props.title}
+        </div>
+        <div class="acoes">
+          <ion-icon name={props.icon_1}></ion-icon>
+        </div>
+      </div>
+
+      <div class="conteudo">
+        <img src={props.img_2} />
+      </div>
+
+      <div class="fundo">
+        <div class="acoes">
+          <div>
+            <ion-icon name={props.icon_2}></ion-icon>
+            <ion-icon name={props.icon_3}></ion-icon>
+            <ion-icon name={props.icon_4}></ion-icon>
+          </div>
+          <div>
+            <ion-icon name={props.icon_5}></ion-icon>
+          </div>
+        </div>
+
+        <div class="curtidas">
+          <img src={props.img_3} />
+          <div class="texto">
+            {props.text}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Conteudo() {
   return (
     <div class="corpo">
       <div class="esquerda">
         <div class="stories">
-          <div class="story">
-            <div class="imagem">
-              <img src="img/9gag.svg" />
-            </div>
-            <div class="usuario">
-              9gag
-            </div>
-          </div>
-
-          <div class="story">
-            <div class="imagem">
-              <img src="img/meowed.svg" />
-            </div>
-            <div class="usuario">
-              meowed
-            </div>
-          </div>
-
-          <div class="story">
-            <div class="imagem">
-              <img src="img/barked.svg" />
-            </div>
-            <div class="usuario">
-              barked
-            </div>
-          </div>
-
-          <div class="story">
-            <div class="imagem">
-              <img src="img/nathanwpylestrangeplanet.svg" />
-            </div>
-            <div class="usuario">
-              nathanwpylestrangeplanet
-            </div>
-          </div>
-
-          <div class="story">
-            <div class="imagem">
-              <img src="img/wawawicomics.svg" />
-            </div>
-            <div class="usuario">
-              wawawicomics
-            </div>
-          </div>
           
-          <div class="story">
-            <div class="imagem">
-              <img src="img/respondeai.svg" />
-            </div>
-            <div class="usuario">
-              respondeai
-            </div>
-          </div>
-
-          <div class="story">
-            <div class="imagem">
-              <img src="img/filomoderna.svg" />
-            </div>
-            <div class="usuario">
-              filomoderna
-            </div>
-          </div>
-
-          <div class="story">
-            <div class="imagem">
-              <img src="img/memeriagourmet.svg" />
-            </div>
-            <div class="usuario">
-              memeriagourmet
-            </div>
-          </div>
+        {story_img_list.map((my_imgs) => (
+          <Story
+          img={my_imgs.img}
+          alt=""
+          user_text={my_imgs.text}
+          />
+        ))}
 
           <div class="setinha">
             <ion-icon name="chevron-forward-circle"></ion-icon>
           </div>
         </div>
 
+        
         <div class="posts">
-          <div class="post">
-            <div class="topo">
-              <div class="usuario">
-                <img src="img/meowed.svg" />
-                meowed
-              </div>
-              <div class="acoes">
-                <ion-icon name="ellipsis-horizontal"></ion-icon>
-              </div>
-            </div>
-
-            <div class="conteudo">
-              <img src="img/gato-telefone.svg" />
-            </div>
-
-            <div class="fundo">
-              <div class="acoes">
-                <div>
-                  <ion-icon name="heart-outline"></ion-icon>
-                  <ion-icon name="chatbubble-outline"></ion-icon>
-                  <ion-icon name="paper-plane-outline"></ion-icon>
-                </div>
-                <div>
-                  <ion-icon name="bookmark-outline"></ion-icon>
-                </div>
-              </div>
-
-              <div class="curtidas">
-                <img src="img/respondeai.svg" />
-                <div class="texto">
-                  Curtido por <strong>respondeai</strong> e <strong>outras 101.523 pessoas</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="post">
-            <div class="topo">
-              <div class="usuario">
-                <img src="img/barked.svg" />
-                barked
-              </div>
-              <div class="acoes">
-                <ion-icon name="ellipsis-horizontal"></ion-icon>
-              </div>
-            </div>
-
-            <div class="conteudo">
-              <img src="img/dog.svg" />
-            </div>
-
-            <div class="fundo">
-              <div class="acoes">
-                <div>
-                  <ion-icon name="heart-outline"></ion-icon>
-                  <ion-icon name="chatbubble-outline"></ion-icon>
-                  <ion-icon name="paper-plane-outline"></ion-icon>
-                </div>
-                <div>
-                  <ion-icon name="bookmark-outline"></ion-icon>
-                </div>
-              </div>
-
-              <div class="curtidas">
-                <img src="img/adorable_animals.svg" />
-                <div class="texto">
-                  Curtido por <strong>adorable_animals</strong> e <strong>outras 99.159 pessoas</strong>
-                </div>
-              </div>
-            </div>
-          </div>
+          
+          {post_info.map((post) => (
+            <Post 
+            title={post.title}
+            img_1={post.img_1}
+            img_2={post.img_2}
+            img_3={post.img_3}
+            icon_1="ellipsis-horizontal"
+            icon_2="heart-outline"
+            icon_3="chatbubble-outline"
+            icon_4="paper-plane-outline"
+            icon_5="bookmark-outline"
+            text={post.text}
+            />
+            ))}
+          
+          
         </div>
       </div>
 
