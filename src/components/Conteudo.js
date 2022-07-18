@@ -16,6 +16,7 @@ const follow_sug_info=[{img:"img/bad.vibes.memes.svg",name:"bad.vibes.memes",rea
 {img:"img/adorable_animals.svg",name:"adorable_animals",reason:"Segue você"},
 {img:"img/smallcutecats.svg",name:"smallcutecats",reason:"Segue você"}]
 
+let icon_name="heart-outline";
 
 function Story(props) {
   return (
@@ -32,8 +33,15 @@ function Story(props) {
 }
 
 function Post(props) {
-  const [like, setLike] = React.useState("selecionado");
-  let icon_name=props.icon_2;
+  const [like, setLike] = React.useState("");
+
+  function reset_state(){
+    if (like !== "selecionado"){
+      setLike("selecionado"); icon_name=props.icon_2_selected;
+    }
+    else { setLike(""); icon_name=props.icon_2; }  
+  }
+
   return (
     <div className="post">
       <div className="topo">
@@ -47,14 +55,7 @@ function Post(props) {
       </div>
 
       <div className="conteudo" 
-          onClick={() => {
-            // setLike("selecionado")
-            if (like !== "selecionado"){
-              setLike("selecionado"); icon_name=props.icon_2_selected;
-            }
-            else { setLike(""); icon_name=props.icon_2; }  
-            console.log(like)
-          }}>
+          onClick={() => {reset_state()}}>
         <img src={props.img_2} />
       </div>
 
@@ -62,14 +63,8 @@ function Post(props) {
         <div className="acoes">
           <div>
             
-            <ion-icon className={like} name={icon_name}
-            onClick={() => {
-              if (like !== "selecionado"){
-                setLike("selecionado"); icon_name=props.icon_2_selected;
-              }
-              else { setLike(""); icon_name=props.icon_2; }  
-              console.log(like)
-            }}></ion-icon>
+            <ion-icon name={icon_name}
+             onClick={() => {reset_state()}}></ion-icon> 
 
             <ion-icon name={props.icon_3}></ion-icon>
             <ion-icon name={props.icon_4}></ion-icon>

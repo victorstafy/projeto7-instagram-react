@@ -184,6 +184,10 @@ body {
   width: 100%;
 }
 
+ion-icon[name="heart"] {
+  color:red;
+}
+
 .post .fundo .acoes {
   display: flex;
   justify-content: space-between;
@@ -310,9 +314,6 @@ body {
   display: none !important;
 }
 
-.selecionado ion-icon{
-  color: red;
-}
 
 @media (max-width: 935px) {
   .sidebar {
