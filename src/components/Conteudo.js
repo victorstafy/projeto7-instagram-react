@@ -1,20 +1,29 @@
+import React from "react";
+
 const story_img_list=[{img:"img/9gag.svg",text:"9gag"},{img:"img/meowed.svg",text:"meowed"},
                       {img:"img/barked.svg",text:"barked"},{img:"img/nathanwpylestrangeplanet.svg",text:"nathanwpylestrangeplanet"},
                       {img:"img/wawawicomics.svg",text:"wawawicomics"},{img:"img/respondeai.svg",text:"respondeai"},        
                       {img:"img/filomoderna.svg",text:"memeriagourmet"},{img:"img/memeriagourmet.svg",text:"memeriagourmet"}];
+
 const post_info=[{title:"meowed",img_1:"img/meowed.svg",img_2:"img/gato-telefone.svg",img_3:"img/respondeai.svg",
-text:"Curtido por <strong>respondeai</strong> e <strong>outras 101.523 pessoas</strong>"},
+text1:"Curtido por ",text2:"respondeai",text3:" e ",text4:"outras 101.523 pessoas"},
 {title:"barked",img_1:"img/barked.svg",img_2:"img/dog.svg",img_3:"img/adorable_animals.svg",
-text:"Curtido por <strong>adorable_animals</strong> e <strong>outras 99.159 pessoas</strong>"}]
+text1:"Curtido por ",text2:"adorable_animals",text3:" e ",text4:"outras 99.159 pessoas"}]
+
+const follow_sug_info=[{img:"img/bad.vibes.memes.svg",name:"bad.vibes.memes",reason:"Segue você"},
+{img:"img/chibirdart.svg",name:"chibirdart",reason:"Segue você"},
+{img:"img/razoesparaacreditar.svg",name:"razoesparaacreditar",reason:"Novo no Instagram"},
+{img:"img/adorable_animals.svg",name:"adorable_animals",reason:"Segue você"},
+{img:"img/smallcutecats.svg",name:"smallcutecats",reason:"Segue você"}]
 
 
 function Story(props) {
   return (
-    <div class="story">
-        <div class="imagem">
+    <div className="story">
+        <div className="imagem">
           <img src={props.img} />
         </div>
-        <div class="usuario">
+        <div className="usuario">
           {props.user_text}
         </div>
         
@@ -23,26 +32,45 @@ function Story(props) {
 }
 
 function Post(props) {
+  const [like, setLike] = React.useState("selecionado");
+  let icon_name=props.icon_2;
   return (
-    <div class="post">
-      <div class="topo">
-        <div class="usuario">
+    <div className="post">
+      <div className="topo">
+        <div className="usuario">
           <img src={props.img_1} />
           {props.title}
         </div>
-        <div class="acoes">
+        <div className="acoes">
           <ion-icon name={props.icon_1}></ion-icon>
         </div>
       </div>
 
-      <div class="conteudo">
+      <div className="conteudo" 
+          onClick={() => {
+            // setLike("selecionado")
+            if (like !== "selecionado"){
+              setLike("selecionado"); icon_name=props.icon_2_selected;
+            }
+            else { setLike(""); icon_name=props.icon_2; }  
+            console.log(like)
+          }}>
         <img src={props.img_2} />
       </div>
 
-      <div class="fundo">
-        <div class="acoes">
+      <div className="fundo">
+        <div className="acoes">
           <div>
-            <ion-icon name={props.icon_2}></ion-icon>
+            
+            <ion-icon className={like} name={icon_name}
+            onClick={() => {
+              if (like !== "selecionado"){
+                setLike("selecionado"); icon_name=props.icon_2_selected;
+              }
+              else { setLike(""); icon_name=props.icon_2; }  
+              console.log(like)
+            }}></ion-icon>
+
             <ion-icon name={props.icon_3}></ion-icon>
             <ion-icon name={props.icon_4}></ion-icon>
           </div>
@@ -51,10 +79,10 @@ function Post(props) {
           </div>
         </div>
 
-        <div class="curtidas">
+        <div className="curtidas">
           <img src={props.img_3} />
-          <div class="texto">
-            {props.text}
+          <div className="texto">
+          {props.text1}<strong>{props.text2}</strong> {props.text3} <strong>{props.text4}</strong>
           </div>
         </div>
       </div>
@@ -62,11 +90,40 @@ function Post(props) {
   );
 }
 
-export default function Conteudo() {
+function User(props){
   return (
-    <div class="corpo">
-      <div class="esquerda">
-        <div class="stories">
+  <div className="usuario">
+        <img src={props.img} />
+        <div className="texto">
+          <strong>{props.text1}</strong>
+          {props.text2}
+        </div>
+      </div>
+  )
+}
+
+function Suggestion(props){
+  return (
+    <div className="sugestao">
+      <div className="usuario">
+        <img src={props.img} />
+        <div className="texto">
+          <div className="nome">{props.name}</div>
+          <div className="razao">{props.reason}</div>
+        </div>
+      </div>
+
+      <div className="seguir">{props.option}</div>
+    </div>
+  )
+}
+
+export default function Conteudo() {
+  
+  return (
+    <div className="corpo">
+      <div className="esquerda">
+        <div className="stories">
           
         {story_img_list.map((my_imgs) => (
           <Story
@@ -76,14 +133,13 @@ export default function Conteudo() {
           />
         ))}
 
-          <div class="setinha">
+          <div className="setinha">
             <ion-icon name="chevron-forward-circle"></ion-icon>
           </div>
         </div>
 
         
-        <div class="posts">
-          
+        <div className="posts">   
           {post_info.map((post) => (
             <Post 
             title={post.title}
@@ -92,98 +148,49 @@ export default function Conteudo() {
             img_3={post.img_3}
             icon_1="ellipsis-horizontal"
             icon_2="heart-outline"
+            icon_2_selected="heart"
             icon_3="chatbubble-outline"
             icon_4="paper-plane-outline"
             icon_5="bookmark-outline"
-            text={post.text}
+            text1={post.text1}
+            text2={post.text2}
+            text3={post.text3}
+            text4={post.text4}
             />
             ))}
-          
-          
         </div>
       </div>
 
-    <div class="sidebar">
-      <div class="usuario">
-        <img src="img/catanacomics.svg" />
-        <div class="texto">
-          <strong>catanacomics</strong>
-          Catana
-        </div>
-      </div>
+    <div className="sidebar">
+      
+      <User 
+      img="img/catanacomics.svg"
+      text1="catanacomics"
+      text2="Catana"
+      />
 
-      <div class="sugestoes">
-        <div class="titulo">
+      <div className="sugestoes">
+        <div className="titulo">
           Sugestões para você
           <div>Ver tudo</div>
         </div>
 
-        <div class="sugestao">
-          <div class="usuario">
-            <img src="img/bad.vibes.memes.svg" />
-            <div class="texto">
-              <div class="nome">bad.vibes.memes</div>
-              <div class="razao">Segue você</div>
-            </div>
-          </div>
+        {follow_sug_info.map((suggestion) => (    
+          <Suggestion 
+          img={suggestion.img}
+          name={suggestion.name}
+          reason={suggestion.reason}
+          option="Seguir"
+          />
+        ))}
 
-          <div class="seguir">Seguir</div>
-        </div>
-
-        <div class="sugestao">
-          <div class="usuario">
-            <img src="img/chibirdart.svg" />
-            <div class="texto">
-              <div class="nome">chibirdart</div>
-              <div class="razao">Segue você</div>
-            </div>
-          </div>
-
-          <div class="seguir">Seguir</div>
-        </div>
-
-        <div class="sugestao">
-          <div class="usuario">
-            <img src="img/razoesparaacreditar.svg" />
-            <div class="texto">
-              <div class="nome">razoesparaacreditar</div>
-              <div class="razao">Novo no Instagram</div>
-            </div>
-          </div>
-
-          <div class="seguir">Seguir</div>
-        </div>
-
-        <div class="sugestao">
-          <div class="usuario">
-            <img src="img/adorable_animals.svg" />
-            <div class="texto">
-              <div class="nome">adorable_animals</div>
-              <div class="razao">Segue você</div>
-            </div>
-          </div>
-
-          <div class="seguir">Seguir</div>
-        </div>
-
-        <div class="sugestao">
-          <div class="usuario">
-            <img src="img/smallcutecats.svg" />
-            <div class="texto">
-              <div class="nome">smallcutecats</div>
-              <div class="razao">Segue você</div>
-            </div>
-          </div>
-
-          <div class="seguir">Seguir</div>
-        </div>
       </div>
 
-      <div class="links">
+      <div className="links">
         Sobre • Ajuda • Imprensa • API • Carreiras • Privacidade • Termos • Localizações • Contas mais relevantes • Hashtags • Idioma
       </div>
 
-      <div class="copyright">
+      <div className="copyright">
         © 2021 INSTAGRAM DO FACEBOOK
       </div>
     </div>

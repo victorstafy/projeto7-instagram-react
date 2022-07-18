@@ -1,3 +1,5 @@
+const icons_list=["paper-plane-outline","compass-outline","heart-outline","person-outline"];
+
 export default function Header() {
     return (
       <div class="navbar">
@@ -21,10 +23,7 @@ export default function Header() {
         </div>
 
         <div class="icones">
-          <ion-icon name="paper-plane-outline"></ion-icon>
-          <ion-icon name="compass-outline"></ion-icon>
-          <ion-icon name="heart-outline"></ion-icon>
-          <ion-icon name="person-outline"></ion-icon>
+          {icons_list.map((icon) => ( <ion-icon name={icon}></ion-icon> ))}
         </div>
 
         <div class="icones-mobile">
